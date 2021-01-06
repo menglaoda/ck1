@@ -6,7 +6,6 @@ img{
 	display: block;
 }
 .page1{
-	display: none;
 	width: 100%;
 	height: 100vh;
 	background: url(彩练新闻/bg.jpg) 0px 0px/100% ;
@@ -56,7 +55,7 @@ img{
 	color: #ffd571;
 }
 .page2{
-	/*display: none;*/
+	display: none;
 	background: url(彩练新闻/bg2.jpg) 0px 0px/100% ;
 }
 .pg-hd{
