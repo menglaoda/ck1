@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="icon/iconfont.css" type="text/css" rel="stylesheet" />
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.obox{
+				width: 400px;
+				border: solid 1px black;
+				margin: 20px auto;
+			}
+			.hd{
+				background: peru;
+				height: 240px;
+				overflow: hidden;
+				text-align: center;
+				position: relative;
+			}
+			.hd h3{
+				margin-top: 6px;
+			}
+			.icon-yinliang{
+				color: white;
+				font-size: 25px;
+				position: absolute;
+				top: 3px;
+				right: 10px;
+				
+			}
+			.logo{
+				width: 100px;
+				height: 100px;
+				border-radius: 100%;
+				margin-top: 20px;
+				animation: mylogo 10s linear infinite;
+				animation-play-state: paused;
+			}
+			@keyframes mylogo{
+				from{transform: rotate(0deg);}
+				to{transform: rotate(360deg);}
+			}
+			.bofang,.icon-shangyishou_huaban,.icon-xiayishou_huaban{
+				position: absolute;
+				top: 80px;
+				left: 80px;
+				font-size: 40px;
+				color: white;
+				cursor: pointer;
+			}
+			.icon-xiayishou_huaban{
+				left: 280px;
+			}
+			.bofang{
+				top: 160px;
+				left: 180px;
+			}
+			.box1{
+				position: absolute;
+				width: 100%;
+				bottom: 4px;
+				left: 0px;
+			}
+			.box1 input{
+				width: 200px;
+				vertical-align: middle;
+			}
+			.con{
+				background:#B0E0E6;
+				height: 350px;
+				overflow: hidden;
+				position: relative;
+			}
+			.con h3{
+				margin: 20px;
+				font-size: 30px;
+			}
+			.ms{
+				position: absolute;
+				top: 30px;
+				right: 20px;
+				font-weight: 900;
+			}
+			.ms span{
+				font-size: 20px;
+				margin: 0px 4px;
+			}
+			.ms span:first-child{
+				color: red;
+			}
+			.list{
+				list-style: none;
+				margin-left: 20px;
+			}
+			.list li{
+				margin-top: 10px;
+				font-size: 20px;
+			}
+			.list li:first-child{
+				color: red;
+			}
+			.range1{
+				position: absolute;
+			    top: 86px;
+			    right: -42px;
+			    transform: rotate(90deg);
+			    display: none;
+			}
+		</style>
+		<script src="../day34/上课代码/js/jquery-3.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var player = new Audio();
+				player.src = "video/Delacey - Dream It Possible.mp3";
+				var i =0;
+				var timer ;
+				//点击播放
+				$(".bofang").click(function(){
+					if(player.paused==true){
+						player.play();
+						$(".logo").css("animation-play-state","running");
+						$(".bofang").attr("class","icon bofang iconfont icon-bofang1");
+					}else{
+						player.pause();
+						$(".logo").css("animation-play-state","paused");
+						$(".bofang").attr("class","icon bofang iconfont icon-bofang");
+					}
+				})
+				//控制音量
+				$(".icon-yinliang").click(function(){
+					$(".range1").toggle();
+				})
+				$(".range1").bind('input propertychange', function() {
+			        player.volume=$(this).val()/100;
+			    })
+				
+				//下一首
+				$(".icon-xiayishou_huaban").click(function(){
+					i++;
+					if(i==$(".list li").length){
+						i=0;
+					}
+					gys();
+				})
+				//上一首
+				$(".icon-shangyishou_huaban").click(function(){
+					i--;
+					if(i<0){
+						i=$(".list li").length-1;
+					}
+					gys();
+					
+				})
+				function gys(){
+					$(".list li").css("color","black");
+					$(".list li").eq(i).css("color","red");
+					$(".bofang").attr("class","icon bofang iconfont icon-bofang1");
+					$(".logo").css("animation-play-state","running");
+					player.src="video/"+$(".list li").eq(i).html();
+					player.play();
+					$(".bt").html($(".list li").eq(i).html());
+				}
+				//歌曲时长
+				//play：当媒体播放时产生该事件
+				player.onplay = function(){
+					//duration: 媒体总时间(只读)
+					//currentTime: 开始到播放现在所用的时间
+					setTimeout(function(){
+						var zt = parseInt(player.duration);
+						var m = parseInt(zt/60);//分
+						var s = zt%60;//秒
+						$(".zsc").html(bl(m)+":"+bl(s));
+						clearInterval(timer);
+						timer = setInterval(function(){
+							var dqt = parseInt(player.currentTime);
+							var m1 = parseInt(dqt/60);//分
+							var s1 = dqt%60;//秒
+							$(".dqsc").html(bl(m1)+":"+bl(s1));
+							$(".range2").val(dqt/zt*100);
+						},100)
+					},100)
+				}
+				//控制进度
+				$(".range2").bind('input propertychange', function() {
+			        var zt = parseInt(player.duration);
+//			        clearInterval(timer);
+			        player.currentTime=$(this).val()/100*zt;
+			    })
+				function bl(n){
+					return n>=10?n:"0"+n;
+				}
+			})
+		</script>
+	</head>
+	<body>
+		<div class="obox">
+			<div class="hd">
+				<h3 class="bt">Delacey - Dream It Possible.mp3</h3>
+				<span class="icon iconfont icon-yinliang"></span>
+				<input class="range1" type="range" value="100" min="0" max="100" />
+				<img class="logo active" src="莱沃口腔储值卡.jpg" />
+				<span class="icon iconfont icon-shangyishou_huaban"></span>
+				<span class="icon iconfont icon-xiayishou_huaban"></span>
+				<span class="icon iconfont bofang icon-bofang"></span>
+				<div class="box1">
+					<b>时长：</b>
+					<input class="range2" type="range" value="0" min="0" max="100" />
+					<span class="dqsc">00:00</span>/<span class="zsc">03:59</span>
+				</div>
+			</div>
+			<div class="con">
+				<h3>歌曲列表</h3>
+				<div class="ms">
+					<span class="icon iconfont icon-danqubofang"></span>
+					<span class="icon iconfont icon-shunxubofang"></span>
+					<span class="icon iconfont icon-suijibofang"></span>
+				</div>
+				<ul class="list">
+					<li>Delacey - Dream It Possible.mp3</li>
+					<li>陈赫、郑恺 - 奔跑 (Live).mp3</li>
+					<li>冯提莫 - 明天你好.mp3</li>
+					<li>林风 - 你的承诺.mp3</li>
+					<li>铃声 - 速度与激情 (铃声).mp3</li>
+					<li>汪苏泷 - 追光者 (Live).mp3</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
