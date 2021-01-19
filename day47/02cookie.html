@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function(){
+				var btn = document.querySelector(".btn");
+				btn.onclick = function(){
+					//创建cookie
+					document.cookie="name=张三";
+					open("03接受cookie.html");
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<button class="btn">保存</button>
+	</body>
+</html>
