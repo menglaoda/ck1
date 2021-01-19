@@ -1,0 +1,13 @@
+CACHE MANIFEST:
+#这是一个manifest文件
+
+CACHE:
+#要缓存的文件
+01弹性盒例子.html
+02cookie.html
+
+NETWORK：
+03接受cookie.html
+
+FALLBACK：
+05离线缓存.html

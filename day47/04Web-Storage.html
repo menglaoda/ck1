@@ -9,13 +9,18 @@
 				var btn = document.querySelector(".btn");
 				btn.onclick = function(){
 					//创建cookie
-					Cookies.set('name', '站内高三', { expires: 7 });  
+					sessionStorage.setItem("name1","李四");
+					//删除：removeItem(key)
+					localStorage.removeItem("name2");
+					
 					open("03接受cookie.html");
 				}
 				var btn2 = document.querySelector(".btn2");
 				btn2.onclick = function(){
 					//创建cookie
-					Cookies.remove('name');
+					localStorage.setItem("name2","王五1");
+					localStorage.setItem("name3","王五2");
+					localStorage.setItem("name4","王五3");
 					open("03接受cookie.html");
 				}
 			}
