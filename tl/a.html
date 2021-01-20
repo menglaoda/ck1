@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0px;
+			}
+			body{
+				animation: mybody 0.1s linear 8s forwards;
+			}
+			@keyframes mybody{
+				0%{background: none;}
+				99%{background: none;}
+				100%{background: red;}
+			}
+			svg{
+				fill:none;
+				width: 300px;
+				height: 430px;
+				font-size: 40px;
+				stroke-dasharray:2 5 10;
+				animation: mysvg  1s linear infinite alternate;
+			}
+			@keyframes mysvg{
+				from{stroke-dasharray:1 10 1;}
+				to{stroke-dasharray:10 1 10;}
+			}
+			.text2{
+				animation: mysvg  1s  linear 0.3s infinite;
+			}
+			.obox{
+				width: 300px;
+				height: 430px;
+				position: fixed;
+				right: 0px;
+				bottom: 0;
+				background: url(c1.png) right center no-repeat;
+			}
+			.obj{
+				width: 40px;
+				height: 75px;
+				background: url(b1.png) 0px 0px/100% 100%;
+				border: none;
+				animation: myobj 1s step-start 3.5s  forwards;
+			}
+			@keyframes myobj{
+				0%{background: url(b1.png) 0px 0px/100% 100%;}
+				16%{background: url(b2.png) 0px 0px/100% 100%;}
+				32%{background: url(b3.png) 0px 0px/100% 100%;}
+				48%{background: url(b4.png) 0px 0px/100% 100%;}
+				64%{background: url(b3.png) 0px 0px/100% 100%;}
+				80%{background: url(b2.png) 0px 0px/100% 100%;}
+				100%{background: url(b1.png) 0px 0px/100% 100%;}
+			}
+			.box1{
+				width: 40px;
+				height: 75px;
+				position: absolute;
+				top: -33px;
+				left: 160px;
+				animation: mybox1 5s linear 3s forwards;
+			}
+			@keyframes mybox1{
+				0%{top: -33px;left: 160px;}
+				20%{top: -33px;left: 100px;transform: rotate(-170deg);}
+				100%{top: 360px;left: 60px;transform: rotate(-180deg);}
+			}
+			.info{
+				width: 100px;
+				height: 80px;
+				background: url(b5.png) center center/100%;
+				position: absolute;
+				top: -80px;
+				left: -30px;
+				text-align: center;
+				line-height: 80px;
+				font-size: 30px;
+				color: red;
+				animation: myinfo 3s linear forwards;
+			}
+			@keyframes myinfo{
+				0%{font-size: 30px;opacity: 1;}
+				99.9%{font-size: 12px;opacity: 1;}
+				100%{font-size: 12px;opacity: 0;}
+			}	
+		</style>
+	</head>
+	<body>
+		<div class="obox">
+			<div class="box1">
+				<div class="obj"></div>
+				<div class="info">凉凉</div>
+			</div>
+			<svg>
+				<text class="text1"  x="200" y="110" style="writing-mode: tb;stroke: red;">
+	   				 摩天大楼
+	  			</text>
+	  			<text class="text2" x="200" y="110" style="writing-mode: tb;stroke: black;">
+	   			  	摩天大楼
+	  			</text>
+			</svg>
+			
+		</div>
+	</body>
+</html>
